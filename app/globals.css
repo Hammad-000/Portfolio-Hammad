@@ -1,0 +1,202 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.animate-marquee, .animate-pulse, .butterfly-float {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+     @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          animation: marquee 30s linear infinite;
+        }
+        .marquee-track:hover {
+          animation-play-state: paused;
+        }
+        .skill-card {
+          transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        .skill-card:hover {
+          transform: translateY(-4px) scale(1.02);
+          border-color: rgba(59,130,246,0.5);
+          box-shadow: 0 20px 25px -12px rgba(0,0,0,0.2), 0 0 15px rgba(59,130,246,0.4);
+        }
+
+    .mask-gradient {
+          mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          mask-composite: exclude;
+          -webkit-mask-composite: xor;
+        }
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+        .animate-pulse {
+          animation: float 8s ease-in-out infinite;
+        }
+        .delay-1000 {
+          animation-delay: -2s;
+        }
+
+
+ .text-3d-transparent {
+  background: linear-gradient(
+    180deg, 
+    #24120b 0%,    
+    #4d1a1a 50%,   
+    #a93838 100%   
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.15));
+}
+
+
+.dark .text-3d-transparent {
+  background: linear-gradient(
+    180deg, 
+    #538889 10%, 
+    #5ba5c0 50%, 
+    #26bfe5 100%  
+  );
+  -webkit-text-stroke-color: aliceblue;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.btn-theme {
+  @apply relative overflow-hidden rounded-xl px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl;
+  background: linear-gradient(135deg, #24120b 0%, #a93838 100%);
+  background-size: 200% auto;
+}
+
+.dark .btn-theme {
+  background: linear-gradient(135deg, #538889 0%, #26bfe5 100%);
+}
+
+.btn-theme::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-theme:hover::before {
+  left: 100%;
+}
+
+.btn-view-projects {
+  @apply rounded-lg px-6 py-3 font-semibold text-white shadow-md transition-all duration-300 hover:scale-[1.02];
+  background: linear-gradient(135deg, #24120b 0%, #a93838 100%);
+}
+
+.dark .btn-view-projects {
+  background: linear-gradient(135deg, #538889 0%, #26bfe5 100%);
+}
+
+.btn-view-projects {
+  background: linear-gradient(135deg, #24120b 0%, #4d1a1a 50%, #a93838 100%);
+  transition: all 0.3s ease;
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  display: inline-block;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.btn-view-projects:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+}
+
+.dark .btn-view-projects {
+  background: linear-gradient(135deg, #538889 0%, #5ba5c0 50%, #26bfe5 100%);
+}
+
+@keyframes floatButterfly {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(50deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+.butterfly-float {
+  animation: floatButterfly 6s ease-in-out infinite;
+}
+.logo-hammad {
+  @apply text-2xl font-bold tracking-tight;
+  background: linear-gradient(135deg, #24120b 0%, #4d1a1a 50%, #a93838 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.dark .logo-hammad {
+  background: linear-gradient(135deg,  #538889, #5ba5c0, #26bfe5);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.tracking-tight {
+  @apply text-5xl font-bold tracking-tight;
+  background: linear-gradient(135deg, #24120b 0%, #4d1a1a 50%, #a93838 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.dark .tracking-tight{
+  background: linear-gradient(135deg,  #538889, #5ba5c0, #26bfe5);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.logo-hammad {
+  @apply flex items-center;
+}
+
+.logo-hammad .logo-hammad-svg {
+  /* color will inherit from parent; you can add custom hover effects here */
+  transition: transform 0.2s ease;
+}
+
+.logo-hammad:hover .logo-hammad-svg {
+  transform: scale(1.03);
+}
