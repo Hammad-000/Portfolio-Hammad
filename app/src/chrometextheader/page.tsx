@@ -119,7 +119,7 @@ const WaterTextHeader: React.FC = () => {
         className="absolute z-20 max-w-3xl text-center opacity-0 px-4 will-change-transform"
       >
         <p className="text-lg text-foreground/60 md:text-2xl font-medium mb-8">
-          Frontend developer & creative problem solver.
+          Frontend Developer passionate about building functional, full-stack web applications with modern interactive UIs.
         </p>
         <div className="flex justify-center">
           <a href="#projects" className="btn-view-projects">
