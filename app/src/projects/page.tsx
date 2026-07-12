@@ -1,9 +1,7 @@
 "use client";
-
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-// Icons used - usually installed via 'lucide-react' or similar
 import { ExternalLink } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -45,7 +43,7 @@ const projectsData: Project[] = [
     image: "/photos/cake.png",
     video: "/videos/cakesvillas.mp4",
     liveUrl: "https://cakevillaa.vercel.app/",
-    githubUrl: "`https://github.com/Hammad-000/cake`",
+    githubUrl: "https://github.com/Hammad-000/cake",
   },
   {
     id: 2,
