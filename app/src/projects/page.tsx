@@ -71,7 +71,7 @@ function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const headerRef = useRef<HTMLHeadingElement>(null);
-  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);``
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]); ``
 
   useEffect(() => {
     if (!headerRef.current) return;
@@ -139,7 +139,7 @@ function Projects() {
 
       const handleMouseEnter = () => {
         if (video) {
-          video.currentTime = 0; 
+          video.currentTime = 0;
           video.play().catch(error => console.error("Video play failed:", error));
           gsap.to(video, { opacity: 1, duration: 0.3 });
           if (fallbackImg) gsap.to(fallbackImg, { opacity: 0, duration: 0.3 });
@@ -241,6 +241,8 @@ function Projects() {
                 loop
                 muted
                 playsInline
+                autoPlay  
+                preload="auto" 
                 className="absolute inset-0 h-full w-full object-cover opacity-0 will-change-opacity"
               />
               {/* Overlay Gradient */}
