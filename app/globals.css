@@ -2,6 +2,10 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+* {
+  @apply transition-colors duration-300;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
