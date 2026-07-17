@@ -137,14 +137,6 @@ function Projects() {
       const fallbackImg = card.querySelector('.fallback-img') as HTMLElement | null;
       const actionButtons = card.querySelectorAll('.action-btn');
 
-      const handleMouseEnter = () => {
-        if (video) {
-          video.currentTime = 0;
-          video.play().catch(error => console.error("Video play failed:", error));
-          gsap.to(video, { opacity: 1, duration: 0.3 });
-          if (fallbackImg) gsap.to(fallbackImg, { opacity: 0, duration: 0.3 });
-        }
-      };
 
       const handleMouseMove = (e: MouseEvent) => {
         const rect = card.getBoundingClientRect();
