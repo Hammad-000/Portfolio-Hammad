@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { ExternalLink } from 'lucide-react';
@@ -49,7 +49,7 @@ const projectsData: Project[] = [
     id: 2,
     title: "Expense Tracker",
     description: "An expense tracker is a tool that helps you record and monitor your daily spending. It organizes expenses into categories so you can clearly see where your money goes. This makes budgeting easier and helps you manage your finances better.",
-    tech: ["React", "Tailwind", "Supabase",],
+    tech: ["React", "Tailwind", "Supabase"],
     image: "/photos/expense.png",
     video: "/videos/expence.mp4",
     liveUrl: "https://expence-psi.vercel.app/login",
@@ -59,7 +59,7 @@ const projectsData: Project[] = [
     id: 3,
     title: "Inferno Grill",
     description: "Inferno Grill is a fast and modern food ordering website built with React and Supabase, designed to provide a smooth and seamless user experience. It allows customers to easily browse the menu, place orders, and track their food in real time. The platform is optimized for speed, simplicity, and efficient order management.",
-    tech: ["React", "Supabase", "Tailwind",],
+    tech: ["React", "Supabase", "Tailwind"],
     image: "/photos/inferno.png",
     video: "/videos/inferno.mp4",
     liveUrl: "https://inferno-grill.vercel.app/",
@@ -71,7 +71,7 @@ function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const headerRef = useRef<HTMLHeadingElement>(null);
-  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]); ``
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   useEffect(() => {
     if (!headerRef.current) return;
@@ -137,6 +137,23 @@ function Projects() {
       const fallbackImg = card.querySelector('.fallback-img') as HTMLElement | null;
       const actionButtons = card.querySelectorAll('.action-btn');
 
+      const handleMouseEnter = () => {
+        if (!video) return;
+
+        gsap.to(video, { opacity: 1, duration: 0.3 });
+        if (fallbackImg) gsap.to(fallbackImg, { opacity: 0, duration: 0.3 });
+
+        const playPromise = video.play();
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              // Playing safely
+            })
+            .catch((error) => {
+              console.log("Play operation caught safely:", error);
+            });
+        }
+      };
 
       const handleMouseMove = (e: MouseEvent) => {
         const rect = card.getBoundingClientRect();
@@ -163,7 +180,7 @@ function Projects() {
         if (video) {
           video.pause();
           gsap.to(video, { opacity: 0, duration: 0.3 });
-          if (fallbackImg) gsap.to(fallbackImg, { opacity: 1, duration: 0.9 });
+          if (fallbackImg) gsap.to(fallbackImg, { opacity: 1, duration: 0.5 });
         }
       };
 
@@ -194,7 +211,6 @@ function Projects() {
 
   return (
     <section ref={sectionRef} id="projects" className="bg-gray-50 dark:bg-[#08080a] text-gray-900 dark:text-white mx-auto max-w-7xl px-6 py-24 md:py-32 relative overflow-hidden">
-      {/* Background decoration */}
       <div className="absolute inset-0 pointer-events-none opacity-40">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[128px]"></div>
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-[128px]"></div>
@@ -217,33 +233,26 @@ function Projects() {
             className="group relative cursor-pointer flex flex-col rounded-3xl bg-white dark:bg-gray-950 border border-gray-100 dark:border-gray-800/50 shadow-sm transition-all duration-300 hover:shadow-2xl hover:border-gray-200 dark:hover:border-gray-700 overflow-hidden"
             style={{ transformStyle: "preserve-3d", willChange: "transform" }}
           >
-            {/* Media Container (Image/Video) */}
             <div className="relative h-60 md:h-64 overflow-hidden rounded-t-3xl border-b border-gray-100 dark:border-gray-800/50">
-              {/* Fallback Image */}
               <img
                 src={project.image}
                 alt={project.title}
                 className="fallback-img absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 loading="lazy"
               />
-              {/* Hover Video */}
               <video
                 ref={(el) => { videoRefs.current[idx] = el; }}
                 src={project.video}
                 loop
                 muted
                 playsInline
-                autoPlay  
                 preload="auto" 
                 className="absolute inset-0 h-full w-full object-cover opacity-0 will-change-opacity"
               />
-              {/* Overlay Gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
 
-            {/* Content Container */}
             <div className="p-6 md:p-7 flex flex-col flex-grow">
-              {/* Tech Tags */}
               <div className="flex flex-wrap gap-2 mb-4">
                 {project.tech.map((t) => (
                   <span key={t} className="light text-[10px] font-semibold uppercase tracking-wider text-blue-700 dark:text-blue-300 bg-blue-100 dark:bg-blue-950/50 px-2 py-1 rounded-2xl">
@@ -252,7 +261,6 @@ function Projects() {
                 ))}
               </div>
 
-              {/* Title & Description */}
               <h3 className="text-2xl font-bold mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                 {project.title}
               </h3>
@@ -260,7 +268,6 @@ function Projects() {
                 {project.description}
               </p>
 
-              {/* Action Buttons */}
               <div className="flex items-center gap-4 mt-auto pt-4 border-t border-gray-100 dark:border-gray-800/50">
                 <a
                   href={project.liveUrl}
@@ -268,7 +275,6 @@ function Projects() {
                   rel="noopener noreferrer"
                   className="action-btn group/btn btn-theme inline-flex items-center gap-2.5 text-sm font-bold uppercase tracking-wider px-5 py-3 rounded-xl shadow-lg"
                 >
-                  {/* Live Pulse Icon */}
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
@@ -284,13 +290,11 @@ function Projects() {
                   className="action-btn inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-gray-700 hover:text-black dark:text-gray-400 dark:hover:text-white transition-colors"
                 >
                   <GitHubIcon size={20} />
-                  {/* Or use <GitHubIcon size={20} /> if the import fails */}
                   Code
                 </a>
               </div>
             </div>
 
-            {/* Subtle inner glare on hover */}
             <div className="absolute inset-0 rounded-3xl pointer-events-none border-2 border-white/0 group-hover:border-white/10 transition-colors duration-500 z-20"></div>
           </div>
         ))}
