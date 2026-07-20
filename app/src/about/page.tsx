@@ -38,7 +38,7 @@ function About() {
         </h2>
         
         <p className="animate-on-scroll mx-auto mt-4 max-w-2xl text-base text-gray-600 opacity-0 translate-y-6 transition-all duration-700 delay-100 ease-out dark:text-gray-400 md:text-lg">
-          I'm a passionate frontend developer who loves turning ideas into real, functional products.
+          I'm a passionate MERN stack developer who loves turning ideas into real, functional products.
           I focus on performance, accessibility, and delightful user experiences. When I'm not coding,
           I'm probably exploring new tech or contributing to open source.
         </p>
