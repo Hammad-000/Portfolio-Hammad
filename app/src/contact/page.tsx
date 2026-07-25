@@ -128,7 +128,7 @@ function Contact() {
 
                             <div className="pt-2">
                                 <a 
-                                    href="/cv/Hammad_Ahmed_Resume_v3.pdf" 
+                                    href="/cv/Hammad_Ahmed_Resume.pdf" 
                                     download="My_CV.pdf"
                                     className="inline-flex items-center justify-center gap-2 rounded-xl btn-theme px-5 py-3 text-sm font-semibold text-white shadow-md shadow-blue-500/20 transition-all hover:bg-blue-700 hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800"
                                 >
