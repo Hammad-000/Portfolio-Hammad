@@ -13,18 +13,16 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// Type: Metadata enforce kiya hai and OG Image URL absolute set ki hai
 export const metadata: Metadata = {
-  title: "Syed Hammad Ahmed | Frontend Developer",
+  title: "Hammad Ahmed | Frontend Developer",
   description: "Portfolio of a passionate frontend developer specializing in React, Next.js, and delightful user experiences.",
   openGraph: {
-    title: "Syed Hammad Ahmed Portfolio",
+    title: "Hammad Ahmed Portfolio",
     description: "Turning ideas into real, functional web products.",
     url: "https://hammad-nine.vercel.app/",
     siteName: "Hammad Portfolio",
     images: [
       {
-        // Social networks absolute URL hi demand karte hain (Relative paths like ./ broken ho jate hain)
         url: "https://hammad-nine.vercel.app/photos/main.png", 
         width: 1200,
         height: 630,
