@@ -18,13 +18,6 @@ function Contact() {
 
   const introRef = useRef<HTMLDivElement>(null);
   const formColRef = useRef<HTMLDivElement>(null);
-
-  // Self-contained reveal-on-scroll: the previous version relied on
-  // ".animate-on-scroll" being toggled by some external/global script.
-  // If that script isn't present, the section stays invisible forever
-  // (opacity-0 with nothing to remove it). This observer makes each
-  // column reveal itself, and does nothing when the user prefers
-  // reduced motion (content is visible immediately instead).
   useEffect(() => {
     const targets = [introRef.current, formColRef.current].filter(
       (el): el is HTMLDivElement => el !== null
@@ -125,7 +118,6 @@ function Contact() {
       id="contact"
       className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-800/80 dark:to-gray-900"
     >
-      {/* Animated background blobs (decorative, kept out of the accessibility tree) */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
         <div className="absolute -right-24 -top-24 h-56 w-56 rounded-full bg-blue-300 opacity-20 mix-blend-multiply blur-2xl motion-safe:animate-pulse dark:opacity-10 sm:-right-32 sm:-top-40 sm:h-80 sm:w-80 sm:blur-3xl" />
         <div className="absolute -bottom-24 -left-24 h-56 w-56 rounded-full bg-indigo-300 opacity-20 mix-blend-multiply blur-2xl motion-safe:animate-pulse motion-safe:delay-1000 dark:opacity-10 sm:-bottom-40 sm:-left-32 sm:h-80 sm:w-80 sm:blur-3xl" />
@@ -133,7 +125,6 @@ function Contact() {
 
       <div className="relative mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20 md:py-24 lg:px-8">
         <div className="grid grid-cols-1 items-start gap-10 md:grid-cols-2 md:gap-16">
-          {/* Left column: intro & socials */}
           <div
             ref={introRef}
             className="reveal-on-scroll space-y-6 opacity-0 transition-all duration-700 ease-out translate-y-6"
@@ -156,7 +147,6 @@ function Contact() {
               into reality.
             </p>
 
-            {/* Contact details & CV download */}
             <div className="space-y-4 pt-2 sm:pt-4">
               <a
                 href="mailto:syedhammadahmed121@gmail.com"
@@ -234,7 +224,6 @@ function Contact() {
               </div>
             </div>
 
-            {/* Social links */}
             <div className="pt-2 sm:pt-4">
               <p className="mb-3 text-sm font-medium text-gray-500 dark:text-gray-400">
                 Find me on
@@ -274,7 +263,6 @@ function Contact() {
             </div>
           </div>
 
-          {/* Right column: contact form */}
           <div
             ref={formColRef}
             className="reveal-on-scroll opacity-0 transition-all duration-700 ease-out translate-y-6 delay-200"
@@ -361,7 +349,7 @@ function Contact() {
                   aria-busy={formStatus.loading}
                   className="btn-theme w-full disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:scale-100"
                 >
-                  <span className="contact-pg relative flex items-center justify-center gap-2">
+                  <span className="contact-pg relative flex items-center justify-center gap-2 cursor-pointer ">
                     {formStatus.loading ? (
                       <>
                         <svg
