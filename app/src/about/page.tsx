@@ -5,13 +5,9 @@ import dynamic from "next/dynamic";
 import type { LottieRefCurrentProps } from "lottie-react";
 import ButterfliesLight from "../animations/butterflies.json";
 import ButterfliesDark from "../animations/butterflies 2.json";
-
-// Lottie is heavy and needs the browser, so it is loaded only on the client
-// and does not add to the initial bundle.
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
 function About() {
-  // null until we know the theme, so the wrong butterflies never flash.
   const [animationData, setAnimationData] = useState<object | null>(null);
   const [reduceMotion, setReduceMotion] = useState(false);
   const [revealed, setRevealed] = useState(false);
@@ -19,8 +15,6 @@ function About() {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const lottieRef = useRef<LottieRefCurrentProps>(null);
-
-  // Theme: same mapping as before (light-file on dark theme, dark-file on light theme).
   useEffect(() => {
     const checkTheme = () => {
       const isDark = document.documentElement.classList.contains("dark");
@@ -36,7 +30,6 @@ function About() {
     return () => observer.disconnect();
   }, []);
 
-  // Reduced motion: no autoplay, no reveal animation.
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     setReduceMotion(mq.matches);
@@ -46,9 +39,6 @@ function About() {
     return () => mq.removeEventListener("change", onChange);
   }, []);
 
-  // Reveal text when it scrolls into view. Self-contained: the old
-  // "animate-on-scroll opacity-0" classes needed an external script, and
-  // without it the text would stay invisible forever.
   useEffect(() => {
     const el = contentRef.current;
     if (!el) return;
@@ -65,7 +55,6 @@ function About() {
     return () => observer.disconnect();
   }, []);
 
-  // Pause the butterflies while the section is off-screen (saves CPU/battery).
   useEffect(() => {
     const el = sectionRef.current;
     if (!el || reduceMotion) return;
@@ -86,11 +75,7 @@ function About() {
       aria-labelledby="about-heading"
       className="relative flex min-h-[60vh] items-center justify-center overflow-hidden bg-white py-12 dark:bg-gray-800/50 md:py-24 lg:py-32"
     >
-      {/* Butterflies (decorative).
-          Bug fix: before, the flip was an inline style="transform: scaleX(-1)" on this
-          same element. An inline transform replaces Tailwind's -translate-x-1/2 and
-          md:-translate-y-1/2, so the butterflies were NOT centered. The flip now lives
-          on an inner wrapper, so positioning and flipping no longer clash. */}
+  
       <div
         aria-hidden="true"
         className="pointer-events-none absolute left-1/2 top-6 z-10 w-full max-w-[200px] -translate-x-1/2 min-[400px]:max-w-[240px] sm:max-w-[280px] md:left-12 md:top-1/2 md:max-w-[300px] md:-translate-y-1/2 md:translate-x-0 lg:left-24 lg:max-w-[400px]"
