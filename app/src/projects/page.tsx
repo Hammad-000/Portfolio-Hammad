@@ -31,14 +31,25 @@ interface Project {
   description: string;
   tech: string[];
   image: string;
-  video: string;
+  video?: string; // optional: add when the demo video is recorded
   liveUrl: string;
-  githubUrl: string;
+  githubUrl?: string; // optional: hidden while the repo is private
 }
 
 const projectsData: Project[] = [
   {
     id: 1,
+    title: "E-Commerce Platform",
+    description:
+      "Team project (6 developers). Full-stack MERN store where I built the product details page with an image gallery, recently viewed products and related products.",
+    tech: ["React", "Node.js", "Express", "MongoDB"],
+    image: "/photos/ecom.png", // add a screenshot with this name in /public/photos
+    // video: "/videos/ecom.mp4", // uncomment after recording the video
+    liveUrl: "https://ecom-store-pk.vercel.app/",
+    // githubUrl: "", // add the link when the repo is made public
+  },
+  {
+    id: 2,
     title: "Cakes Villa",
     description:
       "Full-stack cake ordering app. Customers browse cakes, open details and place orders; the admin side manages orders and data.",
@@ -49,7 +60,7 @@ const projectsData: Project[] = [
     githubUrl: "https://github.com/Hammad-000/cake",
   },
   {
-    id: 2,
+    id: 3,
     title: "Expense Tracker",
     description:
       "Log in, record your daily spending and see it grouped by category, so it's clear where the money goes.",
@@ -59,26 +70,10 @@ const projectsData: Project[] = [
     liveUrl: "https://expence-psi.vercel.app/login",
     githubUrl: "https://github.com/Hammad-000/expence",
   },
-  {
-    id: 3,
-    title: "Inferno Grill",
-    description:
-      "Food ordering site with a browsable menu, checkout and real-time order tracking, powered by Supabase.",
-    tech: ["React", "Supabase", "Tailwind"],
-    image: "/photos/inferno.png",
-    video: "/videos/inferno.mp4",
-    liveUrl: "https://inferno-grill.vercel.app/",
-    githubUrl: "https://github.com/Hammad-000/inferno-grill",
-  },
 ];
 
 const HEADING = "Projects";
 
-/**
- * Shared play/stop logic for a card's preview video.
- * The file is only requested the first time it is played (lazy load),
- * and a play() that gets interrupted by stop() is ignored safely.
- */
 function createVideoControls(video: HTMLVideoElement | null) {
   let active = false;
   return {
@@ -94,7 +89,6 @@ function createVideoControls(video: HTMLVideoElement | null) {
           if (active) gsap.to(video, { opacity: 1, duration: 0.3, overwrite: true });
         })
         .catch(() => {
-          // Interrupted, or blocked (e.g. iOS Low Power Mode): the image stays visible.
         });
     },
     stop() {
@@ -120,7 +114,6 @@ function Projects() {
     const cards = cardRefs.current.filter((c): c is HTMLElement => c !== null);
     const mm = gsap.matchMedia();
 
-    // 1) Entrance animations (skipped for reduced-motion users).
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       gsap.fromTo(
         letters,
@@ -152,7 +145,6 @@ function Projects() {
       });
     });
 
-    // 2) Mouse devices: video on hover/focus + 3D tilt.
     mm.add("(hover: hover) and (pointer: fine)", () => {
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       const cleanups: (() => void)[] = [];
@@ -172,7 +164,7 @@ function Projects() {
         const onMouseMove = (e: MouseEvent) => {
           if (!rotX || !rotY) return;
           const r = card.getBoundingClientRect();
-          const px = (e.clientX - r.left) / r.width - 0.5; // -0.5 .. 0.5
+          const px = (e.clientX - r.left) / r.width - 0.5; 
           const py = (e.clientY - r.top) / r.height - 0.5;
           rotX(py * -8);
           rotY(px * 8);
@@ -205,9 +197,6 @@ function Projects() {
       return () => cleanups.forEach((fn) => fn());
     });
 
-    // 3) Touch devices (phones/tablets): there is no hover, so the video plays
-    //    while a card is in the middle band of the screen, and pauses otherwise.
-    //    Skipped when the user has Data Saver on or prefers reduced motion.
     mm.add("(hover: none) and (prefers-reduced-motion: no-preference)", () => {
       const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
       if (conn?.saveData) return;
@@ -216,8 +205,8 @@ function Projects() {
         const controls = createVideoControls(videoRefs.current[index]);
         return ScrollTrigger.create({
           trigger: card,
-          start: "center 70%", // card centre passes 70% of viewport height...
-          end: "center 30%", // ...until it passes 30%: only one card is active at a time
+          start: "center 70%", 
+          end: "center 30%", 
           onToggle: (self) => (self.isActive ? controls.start() : controls.stop()),
         });
       });
@@ -235,7 +224,6 @@ function Projects() {
       aria-labelledby="projects-heading"
       className="relative overflow-hidden bg-gray-50 text-gray-900 dark:bg-[#08080a] dark:text-white"
     >
-      {/* Background glow (smaller + cheaper blur on mobile) */}
       <div className="pointer-events-none absolute inset-0 opacity-40" aria-hidden="true">
         <div className="absolute left-1/4 top-0 h-64 w-64 rounded-full bg-blue-500/10 blur-[80px] md:h-96 md:w-96 md:blur-[128px]" />
         <div className="absolute bottom-0 right-1/4 h-64 w-64 rounded-full bg-purple-500/10 blur-[80px] md:h-96 md:w-96 md:blur-[128px]" />
@@ -264,7 +252,6 @@ function Projects() {
           </p>
         </div>
 
-        {/* 1 column on phones (capped width so cards don't get huge), 2 on tablets, 3 on desktop */}
         <div className="mx-auto grid max-w-xl grid-cols-1 gap-6 sm:gap-8 md:max-w-none md:grid-cols-2 md:gap-10 lg:grid-cols-3">
           {projectsData.map((project, idx) => (
             <article
@@ -274,8 +261,6 @@ function Projects() {
               }}
               className="group relative flex flex-col overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm transition-[box-shadow,border-color] duration-300 hover:border-gray-200 hover:shadow-2xl dark:border-gray-800/50 dark:bg-gray-950 dark:hover:border-gray-700"
             >
-              {/* Whole-card click target (mouse/touch only). Keyboard and screen-reader
-                  users use the real buttons below, so this is hidden from them. */}
               <a
                 href={project.liveUrl}
                 target="_blank"
@@ -285,7 +270,6 @@ function Projects() {
                 className="absolute inset-0 z-10 cursor-pointer"
               />
 
-              {/* aspect ratio scales with the card, instead of a fixed height */}
               <div className="relative aspect-[16/10] overflow-hidden border-b border-gray-100 dark:border-gray-800/50">
                 <Image
                   src={project.image}
@@ -294,19 +278,21 @@ function Projects() {
                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                   className="object-cover"
                 />
-                <video
-                  ref={(el) => {
-                    videoRefs.current[idx] = el;
-                  }}
-                  data-src={project.video}
-                  loop
-                  muted
-                  playsInline
-                  preload="none"
-                  aria-hidden="true"
-                  tabIndex={-1}
-                  className="absolute inset-0 h-full w-full object-cover opacity-0"
-                />
+                {project.video && (
+                  <video
+                    ref={(el) => {
+                      videoRefs.current[idx] = el;
+                    }}
+                    data-src={project.video}
+                    loop
+                    muted
+                    playsInline
+                    preload="none"
+                    aria-hidden="true"
+                    tabIndex={-1}
+                    className="absolute inset-0 h-full w-full object-cover opacity-0"
+                  />
+                )}
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-focus-within:opacity-100 group-hover:opacity-100" />
               </div>
 
@@ -329,14 +315,15 @@ function Projects() {
                   {project.description}
                 </p>
 
-                {/* z-20 keeps the buttons above the whole-card link. min-h-11 = 44px touch targets. */}
                 <div className="relative z-20 mt-auto grid grid-cols-[3fr_2fr] items-center gap-3 border-t border-gray-100 pt-4 dark:border-gray-800/50 sm:flex sm:flex-wrap">
                   <a
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${project.title} live demo (opens in a new tab)`}
-                    className="group/btn btn-theme inline-flex min-h-11 w-full items-center justify-center gap-1.5 whitespace-nowrap rounded-xl px-3 py-2.5 text-xs font-bold uppercase tracking-wide shadow-lg sm:flex-1 sm:gap-2 sm:px-4 sm:tracking-wider transition-transform active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 motion-reduce:transform-none [@media(hover:hover)]:hover:-translate-y-0.5 [@media(hover:hover)]:hover:scale-105"
+                    className={`group/btn btn-theme inline-flex min-h-11 w-full items-center justify-center gap-1.5 whitespace-nowrap rounded-xl px-3 py-2.5 text-xs font-bold uppercase tracking-wide shadow-lg sm:flex-1 sm:gap-2 sm:px-4 sm:tracking-wider transition-transform active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 motion-reduce:transform-none [@media(hover:hover)]:hover:-translate-y-0.5 [@media(hover:hover)]:hover:scale-105 ${
+                      project.githubUrl ? "" : "col-span-2"
+                    }`}
                   >
                     <span className="relative flex h-2 w-2" aria-hidden="true">
                       <span className="absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75 motion-safe:animate-ping" />
@@ -350,16 +337,18 @@ function Projects() {
                     />
                   </a>
 
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${project.title} source code on GitHub (opens in a new tab)`}
-                    className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-gray-200 px-3 py-2.5 text-xs font-bold uppercase tracking-wide text-gray-700 sm:w-auto sm:px-4 sm:tracking-wider transition-colors active:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 dark:border-gray-800 dark:text-gray-300 dark:active:bg-gray-900 [@media(hover:hover)]:hover:border-gray-400 [@media(hover:hover)]:hover:text-black dark:[@media(hover:hover)]:hover:border-gray-600 dark:[@media(hover:hover)]:hover:text-white"
-                  >
-                    <GitHubIcon size={18} />
-                    Code
-                  </a>
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${project.title} source code on GitHub (opens in a new tab)`}
+                      className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-gray-200 px-3 py-2.5 text-xs font-bold uppercase tracking-wide text-gray-700 sm:w-auto sm:px-4 sm:tracking-wider transition-colors active:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 dark:border-gray-800 dark:text-gray-300 dark:active:bg-gray-900 [@media(hover:hover)]:hover:border-gray-400 [@media(hover:hover)]:hover:text-black dark:[@media(hover:hover)]:hover:border-gray-600 dark:[@media(hover:hover)]:hover:text-white"
+                    >
+                      <GitHubIcon size={18} />
+                      Code
+                    </a>
+                  )}
                 </div>
               </div>
 
