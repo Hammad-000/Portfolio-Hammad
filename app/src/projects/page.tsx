@@ -31,9 +31,9 @@ interface Project {
   description: string;
   tech: string[];
   image: string;
-  video?: string; // optional: add when the demo video is recorded
+  video?: string; 
   liveUrl: string;
-  githubUrl?: string; // optional: hidden while the repo is private
+  githubUrl?: string;
 }
 
 const projectsData: Project[] = [
@@ -43,10 +43,9 @@ const projectsData: Project[] = [
     description:
       "Team project (6 developers). Full-stack MERN store where I built the product details page with an image gallery, recently viewed products and related products.",
     tech: ["React", "Node.js", "Express", "MongoDB"],
-    image: "/photos/ecom.png", // add a screenshot with this name in /public/photos
-    // video: "/videos/ecom.mp4", // uncomment after recording the video
+    image: "/photos/ecom.png", 
+     video: "/videos/ecom.mp4",
     liveUrl: "https://ecom-store-pk.vercel.app/",
-    // githubUrl: "", // add the link when the repo is made public
   },
   {
     id: 2,
