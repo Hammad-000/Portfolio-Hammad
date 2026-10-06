@@ -15,13 +15,14 @@ function About() {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const lottieRef = useRef<LottieRefCurrentProps>(null);
+
   useEffect(() => {
+
     const checkTheme = () => {
       const isDark = document.documentElement.classList.contains("dark");
       setAnimationData(isDark ? ButterfliesLight : ButterfliesDark);
     };
-    checkTheme();
-
+    checkTheme(); 
     const observer = new MutationObserver(checkTheme);
     observer.observe(document.documentElement, {
       attributes: true,
@@ -68,6 +69,7 @@ function About() {
 
   const reveal = revealed ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0";
 
+
   return (
     <section
       ref={sectionRef}
@@ -75,7 +77,7 @@ function About() {
       aria-labelledby="about-heading"
       className="relative flex min-h-[60vh] items-center justify-center overflow-hidden bg-white py-12 dark:bg-gray-800/50 md:py-24 lg:py-32"
     >
-  
+
       <div
         aria-hidden="true"
         className="pointer-events-none absolute left-1/2 top-6 z-10 w-full max-w-[200px] -translate-x-1/2 min-[400px]:max-w-[240px] sm:max-w-[280px] md:left-12 md:top-1/2 md:max-w-[300px] md:-translate-y-1/2 md:translate-x-0 lg:left-24 lg:max-w-[400px]"

@@ -86,7 +86,22 @@ function Contact() {
       [e.target.name]: e.target.value,
     });
   };
-
+  const MailIcon = () => (
+    <svg
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+      />
+    </svg>
+  );
   const GitHubIcon = () => (
     <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
       <path
@@ -111,6 +126,8 @@ function Contact() {
         clipRule="evenodd"
       />
     </svg>
+
+  
   );
 
   return (
@@ -229,6 +246,16 @@ function Contact() {
                 Find me on
               </p>
               <div className="flex flex-wrap gap-2.5 sm:gap-3">
+
+                <a
+                  href="mailto:syedhammadahmed121@gmail.com"
+                  className="group flex min-h-11 items-center gap-2 rounded-full bg-white/70 px-3.5 py-2 text-sm font-medium text-gray-700 shadow-sm ring-1 ring-gray-200 backdrop-blur-sm transition-all hover:bg-blue-50 hover:shadow-md active:scale-95 dark:bg-gray-800/70 dark:text-gray-300 dark:ring-gray-700 dark:hover:bg-blue-900/30 sm:px-4 [@media(hover:hover)]:hover:scale-105"
+                  aria-label="Email"
+                >
+                  <MailIcon />
+                  Email
+                </a>
+
                 <a
                   href="https://github.com/Hammad-000"
                   target="_blank"
@@ -333,11 +360,10 @@ function Contact() {
                   <div
                     role="status"
                     aria-live="polite"
-                    className={`rounded-xl p-4 text-sm font-medium backdrop-blur-sm ${
-                      formStatus.type === "success"
+                    className={`rounded-xl p-4 text-sm font-medium backdrop-blur-sm ${formStatus.type === "success"
                         ? "bg-green-100/80 text-green-800 ring-1 ring-green-500/20 dark:bg-green-900/40 dark:text-green-300"
                         : "bg-red-100/80 text-red-800 ring-1 ring-red-500/20 dark:bg-red-900/40 dark:text-red-300"
-                    }`}
+                      }`}
                   >
                     {formStatus.message}
                   </div>

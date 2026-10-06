@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import ".././app/globals.css";
 import { useEffect, useRef, useState, useLayoutEffect, useMemo } from "react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "@studio-freight/lenis";
 import dynamic from 'next/dynamic'; 
-
+import gsap from "gsap";
 import ChromeTextHeader from "./src/chrometextheader/page";
 import Skills from "./src/skills/page";
 import Footer from "./src/footer/page";
@@ -12,10 +14,6 @@ import Projects from "./src/projects/page";
 import Contact from "./src/contact/page";
 import About from "./src/about/page";
 import Logo from "./src/logo/page";
-
-import ".././app/globals.css";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
@@ -29,7 +27,6 @@ export default function Home() {
   const parrotRef = useRef<HTMLDivElement>(null);
   const lenisRef = useRef<Lenis | null>(null);
 
-  // 1. Theme Logic (Hydration safe structure)
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
     const initialTheme = storedTheme || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
@@ -39,15 +36,12 @@ export default function Home() {
   useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
     localStorage.setItem("theme", theme);
-    
-    // Theme change par ScrollTrigger ko refresh karna zaroori hai takay layout offsets crash na hon
     ScrollTrigger.refresh();
   }, [theme]);
 
-  // 2. Lenis + GSAP Sync
   useLayoutEffect(() => {
     const lenis = new Lenis({
-      duration: 1.1, // Smooth feel ke liye thoda sa adjustment
+      duration: 1.1, 
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
     });
@@ -67,7 +61,6 @@ export default function Home() {
     gsap.ticker.add(tickerCallback);
     gsap.ticker.lagSmoothing(0);
 
-    // Context wrap taaki memory easily free ho sake cleanup par
     const ctx = gsap.context(() => {
       gsap.set(parrotRef.current, {
         xPercent: 100,
@@ -88,7 +81,6 @@ export default function Home() {
       .to(parrotRef.current, { rotation: -360, ease: "none" })
       .to(parrotRef.current, { left: "17%", xPercent: 0, ease: "none" });
 
-      // Efficient Scroll Animations
       const elements = document.querySelectorAll(".animate-on-scroll");
       elements.forEach((el) => {
         gsap.fromTo(el, 
@@ -111,7 +103,7 @@ export default function Home() {
       lenis.destroy();
       gsap.ticker.remove(tickerCallback);
     };
-  }, []); // Scroll logic component load par sirf ek baar chalegi
+  }, []);
 
   const toggleTheme = () => setTheme((prev) => (prev === "dark" ? "light" : "dark"));
 
@@ -149,10 +141,9 @@ export default function Home() {
 
       <main>
         <section id="hero"><ChromeTextHeader /></section>
-        <Skills />
-        <Projects />
-        <Contact />
-        <About />
+      <About />
+      <Projects />
+      <Contact />
       </main>
 
       <Footer />

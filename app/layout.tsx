@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Hammad Ahmed | Frontend Developer",
+  title: "Hammad Ahmed | Mern Stack Developer",
   description: "Portfolio of a passionate frontend developer specializing in React, Next.js, and delightful user experiences.",
   openGraph: {
     title: "Hammad Ahmed Portfolio",
