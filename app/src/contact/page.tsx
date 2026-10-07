@@ -102,6 +102,7 @@ function Contact() {
       />
     </svg>
   );
+  
   const GitHubIcon = () => (
     <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
       <path
@@ -312,7 +313,7 @@ function Contact() {
                     value={formData.name}
                     onChange={handleChange}
                     className="w-full rounded-xl border border-gray-200 bg-white/50 px-4 py-3 text-base text-gray-900 placeholder-gray-400 transition-all duration-200 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-gray-700 dark:bg-gray-900/50 dark:text-white dark:placeholder-gray-500"
-                    placeholder="John Doe"
+                    placeholder="Your Name"
                   />
                 </div>
 
