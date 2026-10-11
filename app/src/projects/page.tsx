@@ -63,7 +63,7 @@ const projectsData: Project[] = [
     title: "Expense Tracker",
     description:
       "Log in, record your daily spending and see it grouped by category, so it's clear where the money goes.",
-    tech: ["React", "Supabase", "Tailwind"],
+    tech: ["React", "Firebase", "Tailwind"],
     image: "/photos/expense.png",
     video: "/videos/expence.mp4",
     liveUrl: "https://expence-psi.vercel.app/login",
