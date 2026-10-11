@@ -62,10 +62,10 @@ const projectsData: Project[] = [
     id: 3,
     title: "Expense Tracker",
     description:
-      "Log in, record your daily spending and see it grouped by category, so it's clear where the money goes.",
+      "Expense tracker built with React and Firebase. Features secure authentication and a cloud database, so users can log daily spending and see it grouped by category.",
     tech: ["React", "Firebase", "Tailwind"],
-    image: "/photos/expense.png",
-    video: "/videos/expence.mp4",
+    image: "/photos/expencenew.webp",
+    video: "/videos/expensetr.mp4",
     liveUrl: "https://expence-psi.vercel.app/login",
     githubUrl: "https://github.com/Hammad-000/expence",
   },
