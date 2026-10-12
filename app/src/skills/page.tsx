@@ -2,28 +2,42 @@ import React from 'react';
 import {
   SiHtml5,
   SiJavascript,
+  SiTypescript,
   SiReact,
   SiNodedotjs,
   SiTailwindcss,
   SiNextdotjs,
   SiExpress,
   SiMongodb,
+  SiMongoose,
+  SiFirebase,
   SiPostman,
   SiSupabase,
+  SiGit,
+  SiGithub,
+  SiVercel,
+  SiFramer,
 } from 'react-icons/si';
 
 const Skills: React.FC = () => {
   const skills = [
     { name: "HTML", icon: SiHtml5, color: "#E34F26" },
     { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
+    { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
     { name: "React", icon: SiReact, color: "#61DAFB" },
     { name: "Node.js", icon: SiNodedotjs, color: "#339933" },
     { name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" },
-    { name: "Next.js", icon: SiNextdotjs, color: "#000000" },
-    { name: "Express.js", icon: SiExpress, color: "#000000" },
+    { name: "Next.js", icon: SiNextdotjs, adaptive: true },
+    { name: "Express.js", icon: SiExpress, adaptive: true },
     { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
-    { name: "Postman", icon: SiPostman, color: "#FF6C37" },
+    { name: "Mongoose", icon: SiMongoose, color: "#880000" },
+    { name: "Firebase", icon: SiFirebase, color: "#FFCA28" },
     { name: "Supabase", icon: SiSupabase, color: "#3ECF8E" },
+    { name: "Postman", icon: SiPostman, color: "#FF6C37" },
+    { name: "Git", icon: SiGit, color: "#F05032" },
+    { name: "GitHub", icon: SiGithub, adaptive: true },
+    { name: "Vercel", icon: SiVercel, adaptive: true },
+    { name: "Framer Motion", icon: SiFramer, color: "#0055FF" },
   ];
 
   const allSkills = [...skills, ...skills];
@@ -42,10 +56,13 @@ const Skills: React.FC = () => {
           <div className="marquee-track flex w-max animate-marquee whitespace-nowrap py-4">
             {allSkills.map((skill, idx) => (
               <div
-                key={idx}
+                key={`${skill.name}-${idx}`}
                 className="skill-card mx-4 inline-flex items-center gap-3 px-5 py-3 rounded-2xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 cursor-pointer border border-gray-200 dark:border-gray-700"
               >
-                <skill.icon className="text-2xl" style={{ color: skill.color }} />
+                <skill.icon
+                  className={`text-2xl ${skill.adaptive ? "text-black dark:text-white" : ""}`}
+                  style={skill.adaptive ? undefined : { color: skill.color }}
+                />
                 <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">
                   {skill.name}
                 </span>
@@ -54,7 +71,6 @@ const Skills: React.FC = () => {
           </div>
         </div>
       </div>
-
     </section>
   );
 };

@@ -141,6 +141,7 @@ export default function Home() {
 
       <main>
         <section id="hero"><ChromeTextHeader /></section>
+        <Skills />
       <About />
       <Projects />
       <Contact />
