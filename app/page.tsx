@@ -5,12 +5,12 @@ import ".././app/globals.css";
 import { useEffect, useRef, useState, useLayoutEffect, useMemo } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "@studio-freight/lenis";
-import dynamic from 'next/dynamic'; 
+import dynamic from 'next/dynamic';
 import gsap from "gsap";
 import ChromeTextHeader from "./src/chrometextheader/page";
 import Skills from "./src/skills/page";
 import Footer from "./src/footer/page";
-import Projects from "./src/projects/page";
+import Projects from "./src/components/projects/page";
 import Contact from "./src/contact/page";
 import About from "./src/about/page";
 import Logo from "./src/logo/page";
@@ -41,7 +41,7 @@ export default function Home() {
 
   useLayoutEffect(() => {
     const lenis = new Lenis({
-      duration: 1.1, 
+      duration: 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
     });
@@ -53,7 +53,7 @@ export default function Home() {
     };
 
     lenis.on('scroll', scrollHandler);
-    
+
     const tickerCallback = (time: number) => {
       lenis.raf(time * 1000);
     };
@@ -74,24 +74,24 @@ export default function Home() {
           trigger: "body",
           start: "top top",
           end: "bottom bottom",
-          scrub: 0.5, 
+          scrub: 0.5,
         },
       })
-      .to(parrotRef.current, { left: "50%", xPercent: -50, ease: "none" })
-      .to(parrotRef.current, { rotation: -360, ease: "none" })
-      .to(parrotRef.current, { left: "17%", xPercent: 0, ease: "none" });
+        .to(parrotRef.current, { left: "50%", xPercent: -50, ease: "none" })
+        .to(parrotRef.current, { rotation: -360, ease: "none" })
+        .to(parrotRef.current, { left: "17%", xPercent: 0, ease: "none" });
 
       const elements = document.querySelectorAll(".animate-on-scroll");
       elements.forEach((el) => {
-        gsap.fromTo(el, 
+        gsap.fromTo(el,
           { opacity: 0, y: 30 },
-          { 
-            opacity: 1, y: 0, 
+          {
+            opacity: 1, y: 0,
             scrollTrigger: {
               trigger: el,
               start: "top 85%",
               toggleActions: "play none none reverse"
-            } 
+            }
           }
         );
       });
@@ -116,8 +116,8 @@ export default function Home() {
           <Link href="/" className="flex items-center gap-1">
             <Logo className="h-10 w-auto" />
           </Link>
-          <button 
-            onClick={toggleTheme} 
+          <button
+            onClick={toggleTheme}
             className="p-2 cursor-pointer hover:bg-foreground/5 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500/20"
             aria-label="Toggle Theme"
           >
@@ -127,14 +127,14 @@ export default function Home() {
       </header>
 
       {/* Parrot Container with transform-gpu for hardware acceleration */}
-      <div 
-        ref={parrotRef} 
+      <div
+        ref={parrotRef}
         className="fixed z-50 w-48 h-32 pointer-events-none transform-gpu will-change-transform"
       >
-        <Lottie 
-          animationData={parrotData} 
-          loop={true} 
-          autoplay={true} 
+        <Lottie
+          animationData={parrotData}
+          loop={true}
+          autoplay={true}
           rendererSettings={{ preserveAspectRatio: 'xMidYMid slice' }}
         />
       </div>
@@ -142,9 +142,9 @@ export default function Home() {
       <main>
         <section id="hero"><ChromeTextHeader /></section>
         <Skills />
-      <About />
-      <Projects />
-      <Contact />
+        <About />
+        <Projects />
+        <Contact />
       </main>
 
       <Footer />

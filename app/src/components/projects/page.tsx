@@ -4,6 +4,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { ExternalLink } from "lucide-react";
+import { projectsData, Project } from "./projects-data";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,52 +25,6 @@ const GitHubIcon = ({ size = 20 }: { size?: number }) => (
     <path d="M9 18c-4.51 2-5-2-7-2" />
   </svg>
 );
-
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  tech: string[];
-  image: string;
-  video?: string; 
-  liveUrl: string;
-  githubUrl?: string;
-}
-
-const projectsData: Project[] = [
-  {
-    id: 1,
-    title: "E-Commerce Platform",
-    description:
-      "Team project (6 developers). Full-stack MERN store where I built the product details page with an image gallery, recently viewed products and related products.",
-    tech: ["React", "Node.js", "Express", "MongoDB"],
-    image: "/photos/ecom.png", 
-     video: "/videos/ecom.mp4",
-    liveUrl: "https://ecom-store-pk.vercel.app/",
-  },
-  {
-    id: 2,
-    title: "Cakes Villa",
-    description:
-      "Full-stack cake ordering app. Customers browse cakes, open details and place orders; the admin side manages orders and data.",
-    tech: ["React", "Node.js", "Express", "MongoDB", "Tailwind"],
-    image: "/photos/cake.png",
-    video: "/videos/cakesvillas.mp4",
-    liveUrl: "https://cakevillaa.vercel.app/",
-    githubUrl: "https://github.com/Hammad-000/cake",
-  },
-  {
-    id: 3,
-    title: "Expense Tracker",
-    description:
-      "Expense tracker built with React and Firebase. Features secure authentication and a cloud database, so users can log daily spending and see it grouped by category.",
-    tech: ["React", "Firebase", "Tailwind"],
-    image: "/photos/expencenew.webp",
-    video: "/videos/expensetr.mp4",
-    liveUrl: "https://expence-psi.vercel.app/login",
-    githubUrl: "https://github.com/Hammad-000/expence",
-  },
-];
 
 const HEADING = "Projects";
 
@@ -296,31 +251,62 @@ function Projects() {
               </div>
 
               <div className="flex flex-grow flex-col p-5 sm:p-6 md:p-7">
-                <ul className="mb-3 flex flex-wrap gap-2 sm:mb-4" aria-label="Tech used">
+                {/* Role Badge */}
+                <div className="mb-3 inline-flex w-fit">
+                  <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700 dark:bg-blue-950/50 dark:text-blue-300">
+                    {project.role}
+                    {project.teamSize && ` • ${project.teamSize} developers`}
+                  </span>
+                </div>
+
+                {/* Tech Stack */}
+                <ul className="mb-4 flex flex-wrap gap-2" aria-label="Tech used">
                   {project.tech.map((t) => (
                     <li
                       key={t}
-                      className="rounded-2xl bg-blue-100 px-2.5 py-1 text-xs font-semibold text-blue-700 dark:bg-blue-950/50 dark:text-blue-300"
+                      className="rounded-2xl bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-700 dark:bg-gray-800 dark:text-gray-300"
                     >
                       {t}
                     </li>
                   ))}
                 </ul>
 
+                {/* Title */}
                 <h3 className="mb-2 text-xl font-bold transition-colors group-hover:text-blue-600 dark:group-hover:text-blue-400 sm:text-2xl">
                   {project.title}
                 </h3>
-                <p className="mb-5 flex-grow text-sm leading-relaxed text-gray-600 dark:text-gray-400 sm:mb-6">
+
+                {/* Description */}
+                <p className="mb-4 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
                   {project.description}
                 </p>
 
-                <div className="relative z-20 mt-auto grid grid-cols-[3fr_2fr] items-center gap-3 border-t border-gray-100 pt-4 dark:border-gray-800/50 sm:flex sm:flex-wrap">
+                {/* Key Features */}
+                <div className="mb-5 flex-grow">
+                  <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                    Key Features:
+                  </p>
+                  <ul className="space-y-1.5">
+                    {project.keyFeatures.slice(0, 3).map((feature, i) => (
+                      <li
+                        key={i}
+                        className="flex items-start gap-2 text-xs text-gray-600 dark:text-gray-400"
+                      >
+                        <span className="mt-1.5 inline-block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-blue-500" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="relative z-20 grid grid-cols-[3fr_2fr] items-center gap-3 border-t border-gray-100 pt-4 dark:border-gray-800/50 sm:flex sm:flex-wrap">
                   <a
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${project.title} live demo (opens in a new tab)`}
-                    className={`group/btn btn-theme inline-flex min-h-11 w-full items-center justify-center gap-1.5 whitespace-nowrap rounded-xl px-3 py-2.5 text-xs font-bold uppercase tracking-wide shadow-lg sm:flex-1 sm:gap-2 sm:px-4 sm:tracking-wider transition-transform active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 motion-reduce:transform-none [@media(hover:hover)]:hover:-translate-y-0.5 [@media(hover:hover)]:hover:scale-105 ${
+                    className={`group/btn btn-theme inline-flex min-h-11 w-full items-center justify-center gap-1.5 whitespace-nowrap rounded-xl bg-blue-600 px-3 py-2.5 text-xs font-bold uppercase tracking-wide text-white shadow-lg sm:flex-1 sm:gap-2 sm:px-4 sm:tracking-wider transition-transform active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 motion-reduce:transform-none [@media(hover:hover)]:hover:-translate-y-0.5 [@media(hover:hover)]:hover:scale-105 dark:bg-blue-600 dark:hover:bg-blue-700 ${
                       project.githubUrl ? "" : "col-span-2"
                     }`}
                   >

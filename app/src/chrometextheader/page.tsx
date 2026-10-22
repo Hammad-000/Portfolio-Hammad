@@ -5,7 +5,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// useLayoutEffect warns during SSR in Next.js; fall back to useEffect on the server.
 const useIsoLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 const WaterTextHeader: React.FC = () => {
@@ -31,13 +30,11 @@ const WaterTextHeader: React.FC = () => {
 
     const mm = gsap.matchMedia();
 
-    // Reduced motion: no animation at all, just make everything visible.
     mm.add("(prefers-reduced-motion: reduce)", () => {
       gsap.set(revealTargets, { opacity: 1 });
     });
 
     mm.add("(prefers-reduced-motion: no-preference)", () => {
-      // 1) One orchestrated intro on load: name -> role -> buttons.
       const intro = gsap.timeline({ defaults: { ease: "power4.out" } });
       intro
         .to(bgRef.current, { opacity: 1, duration: 1.6, ease: "power2.out" }, 0)
@@ -60,8 +57,7 @@ const WaterTextHeader: React.FC = () => {
           0.85
         );
 
-      // 2) Scroll-out: content drifts up and fades as you leave the hero.
-      //    No pin, so there is no dead 1000px of scrolling.
+
       gsap.to(contentRef.current, {
         y: -60,
         opacity: 0,
@@ -74,9 +70,6 @@ const WaterTextHeader: React.FC = () => {
         },
       });
 
-      // 3) Ambient water motion.
-      //    The wave path is 2 wavelengths long (2400 units, 1 wavelength = 1200).
-      //    Moving it exactly -1200 and repeating gives a seamless infinite loop.
       const ambient: gsap.core.Tween[] = [];
 
       if (waveRef.current) {
@@ -107,7 +100,6 @@ const WaterTextHeader: React.FC = () => {
         );
       }
 
-      // Pause infinite animations when the hero is off-screen (saves CPU/battery).
       ScrollTrigger.create({
         trigger: container,
         start: "top bottom",
@@ -126,7 +118,7 @@ const WaterTextHeader: React.FC = () => {
       id="home"
       aria-label="Introduction"
       className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-background px-4 transition-colors duration-500"
-      style={{ minHeight: "100svh" }} // avoids the mobile address-bar jump of h-screen
+      style={{ minHeight: "100svh" }}
     >
       {/* Water background (decorative) */}
       <div
@@ -169,7 +161,6 @@ const WaterTextHeader: React.FC = () => {
         </svg>
       </div>
 
-      {/* Hero content: everything important is visible on load, no scrolling needed */}
       <div
         ref={contentRef}
         className="relative z-10 flex w-full flex-col items-center gap-8 text-center"
@@ -185,8 +176,9 @@ const WaterTextHeader: React.FC = () => {
           ref={roleRef}
           className="max-w-2xl text-lg font-medium text-foreground/70 opacity-0 md:text-2xl"
         >
-          MERN stack developer building fast, full-stack web apps with polished,
-          interactive interfaces.
+          MERN Stack Developer crafting responsive,
+          scalable, and user-friendly web applications
+          with React, Node.js, Express, and MongoDB.
         </p>
 
         <div ref={ctaRef} className="flex flex-wrap justify-center gap-4 opacity-0">
