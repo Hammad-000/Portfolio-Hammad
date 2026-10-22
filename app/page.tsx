@@ -14,6 +14,7 @@ import Projects from "./src/components/projects/page";
 import Contact from "./src/contact/page";
 import About from "./src/about/page";
 import Logo from "./src/logo/page";
+import GitHubContributions from "./src/components/GitHubContributions";
 
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
@@ -140,9 +141,13 @@ export default function Home() {
       </div>
 
       <main>
-        <section id="hero"><ChromeTextHeader /></section>
+        <section id="hero">
+          <ChromeTextHeader />
+        </section>
+        
         <Skills />
         <About />
+        <GitHubContributions />
         <Projects />
         <Contact />
       </main>
