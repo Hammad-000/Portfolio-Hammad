@@ -1,43 +1,31 @@
 import React from 'react';
-import {
-  SiHtml5,
-  SiJavascript,
-  SiTypescript,
-  SiReact,
-  SiNodedotjs,
-  SiTailwindcss,
-  SiNextdotjs,
-  SiExpress,
-  SiMongodb,
-  SiMongoose,
-  SiFirebase,
-  SiPostman,
-  SiSupabase,
-  SiGit,
-  SiGithub,
-  SiVercel,
-  SiFramer,
+import { SiShadcnui } from 'react-icons/si';
+import { SiHtml5,SiJavascript, SiTypescript,SiReact, SiNodedotjs, SiTailwindcss, SiNextdotjs, SiExpress,
+   SiMongodb, SiMongoose, SiFirebase, SiPostman, SiSupabase,
+SiGit,SiGithub, SiVercel, SiFramer,
 } from 'react-icons/si';
+import { Sparkles } from 'lucide-react';
 
 const Skills: React.FC = () => {
   const skills = [
-    { name: "HTML", icon: SiHtml5, color: "#E34F26" },
-    { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
-    { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
+    { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
+    { name: "Express.js", icon: SiExpress, adaptive: true },
     { name: "React", icon: SiReact, color: "#61DAFB" },
     { name: "Node.js", icon: SiNodedotjs, color: "#339933" },
-    { name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" },
     { name: "Next.js", icon: SiNextdotjs, adaptive: true },
-    { name: "Express.js", icon: SiExpress, adaptive: true },
-    { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
-    { name: "Mongoose", icon: SiMongoose, color: "#880000" },
-    { name: "Firebase", icon: SiFirebase, color: "#FFCA28" },
+    { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
+    { name: "shadcn/ui", icon: SiShadcnui, color: "#000000" },
     { name: "Supabase", icon: SiSupabase, color: "#3ECF8E" },
-    { name: "Postman", icon: SiPostman, color: "#FF6C37" },
+    { name: "Firebase", icon: SiFirebase, color: "#FFCA28" },
+    { name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" },
+    { name: "Mongoose", icon: SiMongoose, color: "#880000" },
     { name: "Git", icon: SiGit, color: "#F05032" },
     { name: "GitHub", icon: SiGithub, adaptive: true },
     { name: "Vercel", icon: SiVercel, adaptive: true },
+    { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
+    { name: "HTML", icon: SiHtml5, color: "#E34F26" },
     { name: "Framer Motion", icon: SiFramer, color: "#0055FF" },
+    { name: "Postman", icon: SiPostman, color: "#FF6C37" },
   ];
 
   const allSkills = [...skills, ...skills];
@@ -45,11 +33,43 @@ const Skills: React.FC = () => {
   return (
     <section className="w-full bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 py-16 md:py-20 overflow-hidden">
       <div className="w-full px-4 lg:px-8">
-        <h2 className=" tech mb-12  text-center text-4xl md:text-5xl font-extrabold tracking-tight  bg-clip-text text-transparent animate-on-scroll opacity-0 translate-y-6 transition-all duration-700 ease-out">
+        <h2 className="tech mb-12 flex items-center justify-center gap-3 text-center text-4xl md:text-5xl font-extrabold tracking-tight bg-clip-text text-transparent animate-on-scroll opacity-0 translate-y-6 transition-all duration-700 ease-out">
+          <Sparkles className="text-3xl md:text-4xl text-yellow-500" />
           Tech I work with
         </h2>
+
+        {/* ===== SECTION: All Skills Grid ===== */}
+        <div className="mb-16">
+          <div className="flex items-center justify-center mb-8">
+            <span className="px-4 py-1 text-sm font-medium border border-gray-300 dark:border-gray-700 rounded-full text-gray-700 dark:text-gray-300">
+              All Technologies
+            </span>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4 max-w-6xl mx-auto">
+            {skills.map((skill) => (
+              <div
+                key={skill.name}
+                className="group cursor-pointer rounded-xl border border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 hover:border-gray-300 dark:hover:border-gray-600"
+              >
+                <div className="flex flex-col items-center justify-center gap-2 p-4 md:p-5">
+                  <skill.icon
+                    className={`text-3xl md:text-4xl transition-transform duration-300 group-hover:scale-110 ${
+                      skill.adaptive ? "text-black dark:text-white" : ""
+                    }`}
+                    style={skill.adaptive ? undefined : { color: skill.color }}
+                  />
+                  <span className="text-xs md:text-sm font-semibold text-gray-800 dark:text-gray-200 text-center">
+                    {skill.name}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ===== Marquee Section ===== */}
         <div className="relative w-full">
-          {/* Gradient overlays for smooth edge fading */}
           <div className="absolute left-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-r from-gray-50 dark:from-gray-900 to-transparent pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-l from-gray-50 dark:from-gray-900 to-transparent pointer-events-none" />
 
