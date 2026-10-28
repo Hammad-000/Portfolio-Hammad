@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Hammad Ahmed Portfolio 🚀
 
-## Getting Started
+Personal portfolio website showcasing my work as a MERN Stack Developer. Built with Next.js, React, and Tailwind CSS.
 
-First, run the development server:
+**Live Demo:** [hammad-nine.vercel.app](https://hammad-nine.vercel.app)
+
+## About Me 👨‍💻
+
+I'm a passionate **MERN Stack Developer** who loves turning ideas into real, functional web products. I specialize in building responsive, scalable, and user-friendly web applications with a focus on performance and accessibility.
+
+## Tech Stack 🛠️
+
+**Frontend:**
+- React.js
+- Next.js
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+
+**Backend:**
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+
+**Tools & Services:**
+- Firebase
+- Supabase
+- Git & GitHub
+- Vercel
+- Postman
+
+## Featured Projects 📁
+
+### 1. **E-Commerce Platform**
+   - Full-stack MERN store with product browsing and management
+   - Features: Product gallery, recently viewed, related products
+   - [Live Demo](https://ecom-store-pk.vercel.app/)
+
+### 2. **Cakes Villa**
+   - Complete cake ordering platform (customer + admin interfaces)
+   - [Live Demo](https://cakevillaa.vercel.app/) | [Code](https://github.com/Hammad-000/cake)
+
+### 3. **Expense Tracker**
+   - Personal finance management with Firebase
+   - [Live Demo](https://expence-psi.vercel.app/login) | [Code](https://github.com/Hammad-000/expence)
+
+## Getting Started 🎯
+
+### Prerequisites
+- Node.js (v14+)
+- npm or yarn
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/Hammad-000/portfolio.git
+cd portfolio
+
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Open http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Build for Production
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+## Features ✨
 
-To learn more about Next.js, take a look at the following resources:
+- 🎨 Responsive Design
+- ⚡ Fast Performance (Next.js optimization)
+- 🎭 Smooth Animations (Framer Motion)
+- 📱 Mobile-First Approach
+- 🌙 Modern UI with Tailwind CSS
+- 📧 Contact Form Integration
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contact & Links 📧
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Email:** syedhammadahmed121@gmail.com
+- **Location:** Karachi, Pakistan
+- **GitHub:** [@Hammad-000](https://github.com/Hammad-000)
+- **LinkedIn:** [Syed Hammad Ahmed](https://www.linkedin.com/in/syed-hammad-ahmed-412834287/)
+- **Twitter/X:** [@Syed__Hammad](https://x.com/Syed__Hammad)
 
-## Deploy on Vercel
+## License 📄
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project is open source and available under the MIT License.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+**Built with Next.js & Tailwind CSS** ✨
