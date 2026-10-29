@@ -32,29 +32,42 @@ body {
 }
 
 /* --- Marquee Animation --- */
+
+/* --- Marquee Animation --- */
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .animate-marquee {
-  animation: marquee 30s linear infinite;
+  display: flex;
+  width: max-content;
+  animation: marquee 50s linear infinite;
+  will-change: transform;
 }
 
-.marquee-track:hover {
+.marquee-track {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+}
+
+.marquee-track:hover .animate-marquee,
+.animate-marquee:hover {
   animation-play-state: paused;
 }
 
-/* --- Skill Card Styles --- */
-.skill-card {
-  transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
 }
 
-.skill-card:hover {
-  transform: translateY(-4px) scale(1.02);
-  border-color: rgba(59,130,246,0.5);
-  box-shadow: 0 20px 25px -12px rgba(0,0,0,0.2), 0 0 15px rgba(59,130,246,0.4);
-}
 
 /* --- Utilities & Floating --- */
 .mask-gradient {
@@ -185,3 +198,5 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
 }
+
+
