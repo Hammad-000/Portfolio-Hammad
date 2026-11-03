@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -14,31 +15,43 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Hammad Ahmed | Mern Stack Developer",
-  description: "Portfolio of a passionate frontend developer specializing in React, Next.js, and delightful user experiences.",
+  metadataBase: new URL("https://hammad-nine.vercel.app"),
+
+  title: "Hammad Ahmed | MERN Stack Developer",
+
+  description:
+    "Portfolio of Hammad Ahmed, a MERN Stack Developer building modern web applications with React, Next.js, Node.js, Express.js, and MongoDB.",
+
+  icons: {
+    icon: "/icon.svg",
+  },
+
   openGraph: {
-    title: "Hammad Ahmed Portfolio",
-    description: "Turning ideas into real, functional web products.",
+    title: "Hammad Ahmed | MERN Stack Developer",
+    description:
+      "Building modern web applications with React, Next.js, Node.js, Express.js, and MongoDB.",
     url: "https://hammad-nine.vercel.app/",
     siteName: "Hammad Portfolio",
     images: [
       {
-        url: "https://hammad-nine.vercel.app/photos/main.png", 
+        url: "/photos/main.png",
         width: 1200,
         height: 630,
-        alt: "Syed Hammad Ahmed Portfolio Preview",
+        alt: "Hammad Ahmed - MERN Stack Developer Portfolio",
       },
     ],
     locale: "en_US",
     type: "website",
   },
+
   twitter: {
     card: "summary_large_image",
-    title: "Syed Hammad Ahmed | Frontend Developer",
-    description: "Turning ideas into real, functional web products.",
-    images: ["https://hammad-nine.vercel.app/photos/main.png"],
-  }
-};
+    title: "Hammad Ahmed | MERN Stack Developer",
+    description:
+      "Building modern web applications with the MERN stack.",
+    images: ["/photos/main.png"],
+  },
+}
 
 export default function RootLayout({
   children,

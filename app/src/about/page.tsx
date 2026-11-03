@@ -40,7 +40,7 @@ function About() {
     return () => mq.removeEventListener("change", onChange);
   }, []);
 
-  useEffect(() => {
+  useEffect(() => {     
     const el = contentRef.current;
     if (!el) return;
     const observer = new IntersectionObserver(
@@ -107,14 +107,17 @@ function About() {
           Who I Am &amp; What I Do
         </h2>
 
-        <p
-          className={`mx-auto mt-5 max-w-2xl text-base leading-relaxed text-gray-600 transition-all delay-100 duration-700 ease-out dark:text-gray-400 sm:mt-6 md:text-lg lg:max-w-3xl lg:text-xl ${reveal}`}
-        >
-          I&apos;m a passionate MERN stack developer who loves turning ideas into real,
-          functional products. I focus on performance, accessibility, and delightful user
-          experiences. When I&apos;m not coding, I&apos;m probably exploring new tech or
-          contributing to open source.
-        </p>
+   <p
+  className={`mx-auto mt-5 max-w-2xl text-base leading-relaxed text-gray-600 transition-all delay-100 duration-700 ease-out dark:text-gray-400 sm:mt-6 md:text-lg lg:max-w-3xl lg:text-xl ${reveal}`}
+>
+  Hi, I&apos;m Hammad Ahmed, a passionate MERN Stack Developer
+  specializing in building modern, responsive, and full-stack web
+  applications. I work with MongoDB, Express.js, React.js, and Node.js
+  to turn ideas into functional digital experiences. I enjoy solving
+  problems, learning new technologies, and building projects that
+  combine clean code with great user experiences. I&apos;m always
+  excited to take on new challenges and grow as a developer.
+</p>
       </div>
     </section>
   );
